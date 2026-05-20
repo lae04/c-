@@ -6,8 +6,9 @@ TARGET   = snake
 # 팀원 파일 완성되면 주석 해제
 SRCS = main.cpp \
        globals.cpp \
-       map.cpp
-       # snake.cpp        ← B 완성 후 추가
+       map.cpp \
+       snake.cpp \
+       renderer.cpp // 추가_하윤
        # item.cpp         ← C 완성 후 추가
        # gate.cpp         ← D 완성 후 추가
        # scoreboard.cpp   ← D 완성 후 추가
