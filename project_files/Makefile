@@ -8,7 +8,7 @@ SRCS = main.cpp \
        globals.cpp \
        map.cpp \
        snake.cpp \
-       renderer.cpp // 추가_하윤
+       renderer.cpp \  # 추가_하윤
        # item.cpp         ← C 완성 후 추가
        # gate.cpp         ← D 완성 후 추가
        # scoreboard.cpp   ← D 완성 후 추가
