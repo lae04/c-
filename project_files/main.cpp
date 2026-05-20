@@ -140,6 +140,7 @@ void runStage(Map& map, int stage) {
 // ────────────────────────────────────────────
 int main() {
     initNcurses();
+    initRenderer(); // 추가_하윤
 
     Map map;
 
@@ -160,7 +161,7 @@ int main() {
             }
         }
     }
-
+    quitRenderer() // 추가_하윤
     endwin();
     return 0;
 }
