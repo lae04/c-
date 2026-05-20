@@ -28,14 +28,11 @@ struct ScoreData {
 //  main.cpp에서 호출하는 함수들
 // ────────────────────────────────────────────
 
-// ncurses 초기화 (main.cpp의 initNcurses() 대신 여기서 통합 관리해도 됨)
+// 점수판 창 초기화 (main의 initNcurses() 다음에 호출)
 void initRenderer();
 
-// 매 틱 화면 전체 갱신 (main.cpp 게임루프 8번 단계)
-void renderAll(const Map& map, const ScoreData& score);
-
-// 점수판만 출력 (main.cpp의 renderScoreboard() stub 교체용)
+// 점수판 출력 (main.cpp의 renderScoreboard() stub 교체)
 void renderScoreboard(const ScoreData& score);
 
-// ncurses 종료
+// 점수판 창 종료 (main의 endwin() 전에 호출)
 void quitRenderer();
