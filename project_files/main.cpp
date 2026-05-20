@@ -1,7 +1,7 @@
 #include "globals.h"
 #include "map.h"
-#include "snake.h"
-#include "renderer.h"
+#include "snake.h" // 추가_하윤
+#include "renderer.h" //추가_하윤
 // 아래는 다른 팀원이 구현 후 include
 // #include "item.h"
 // #include "gate.h"
