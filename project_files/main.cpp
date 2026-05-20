@@ -14,9 +14,9 @@
 //  전방 선언 (각 팀원 구현 전 임시 stub)
 // ────────────────────────────────────────────
 // TODO: 아래 stub들은 각 파일 완성 후 삭제하고 헤더로 교체
-void initSnake()   { /* B 구현 */ }
-void moveSnake()   { /* B 구현 */ }
-bool checkDead()   { return false; }
+// void initSnake()   { /* B 구현 */ }
+// void moveSnake()   { /* B 구현 */ }
+// bool checkDead()   { return false; } // 파일 삭제_하윤
 
 void spawnItem()   { /* C 구현 */ }
 void updateItems() { /* C 구현 */ }
@@ -92,7 +92,7 @@ void showStageClear(int stage) {
 // ────────────────────────────────────────────
 void runStage(Map& map, int stage) {
     map.load(stage);
-    initSnake();
+    initSnake(map); // map 추가_하윤
     spawnItem();
 
     g_gameState = RUNNING;
@@ -108,7 +108,10 @@ void runStage(Map& map, int stage) {
 
         // 3) Snake 이동
         // moveSnake(dir);   // B 구현 후 활성화
-
+        
+        setSnakeDir(dir);
+        moveSnake(map); // 추가_하윤
+        
         // 4) 아이템 갱신
         // updateItems();    // C 구현 후 활성화
 
@@ -116,7 +119,7 @@ void runStage(Map& map, int stage) {
         // spawnGate();      // D 구현 후 활성화
 
         // 6) 충돌 체크
-        if (checkDead()) {
+        if (checkDead(map)) { // map 추가_하윤
             g_gameState = GAME_OVER;
             break;
         }
@@ -161,7 +164,7 @@ int main() {
             }
         }
     }
-    quitRenderer() // 추가_하윤
+    quitRenderer(); // 추가_하윤
     endwin();
     return 0;
 }
