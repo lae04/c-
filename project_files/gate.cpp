@@ -61,7 +61,6 @@ void GateManager::update(Map& map) {
         return;
     }
 
-    // 추가_민석: Gate 수명 만료 시 새 Gate 생성
     if ((g_tick - spawnTick_) >= GATE_LIFE) {
         removeGate(map);
         spawnGate(map);
@@ -91,7 +90,6 @@ bool GateManager::enterGate(Map& map, const Pos& entrance, Direction currentDir)
     const Direction exitDir = getExitDirection(map, exitGate, currentDir);
     const Pos newHead = nextPos(exitGate, exitDir);
 
-    // 추가_민석: 진출 위치가 유효하지 않으면 Game Over 처리
     if (!map.inBounds(newHead.y, newHead.x)) {
         g_gameState = GAME_OVER;
         return false;
@@ -173,7 +171,6 @@ void GateManager::spawnGate(Map& map) {
     const Pos first = randomWallPos(map);
     Pos second = randomWallPos(map);
 
-    // 추가_민석: 두 Gate가 겹치지 않도록 다시 뽑기
     int retry = 0;
     while (second == first && retry < 100) {
         second = randomWallPos(map);
@@ -241,13 +238,14 @@ Pos GateManager::getExitGate(const Pos& entrance) const {
 //    현재 진행 방향 → 시계방향 → 반시계방향 → 반대방향 순서로 검사
 // ---------------------------------------------------------------
 
-Direction GateManager::getExitDirection(const Map& map, const Pos& exitGate, Direction currentDir) const {
+Direction GateManager::getExitDirection(const Map& map,
+                                        const Pos& exitGate,
+                                        Direction currentDir) const {
     const int top = 1;
     const int bottom = map.getHeight() - 2;
     const int left = 1;
     const int right = map.getWidth() - 2;
 
-    // 추가_민석: 가장자리 Wall에 Gate가 있을 때는 무조건 안쪽 방향
     if (exitGate.y == top) {
         return DOWN;
     }
@@ -264,7 +262,6 @@ Direction GateManager::getExitDirection(const Map& map, const Pos& exitGate, Dir
         return LEFT;
     }
 
-    // 추가_민석: 내부 Wall Gate일 때 진출 우선순위 적용
     const Direction candidates[4] = {
         currentDir,
         clockwise(currentDir),

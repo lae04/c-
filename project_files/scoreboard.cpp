@@ -47,7 +47,6 @@ void ScoreboardManager::init(int stage) {
     poisonCount_ = 0;
     gateCount_ = 0;
 
-    // 추가_민석: C단계 추가 아이템 Reverse Item 표시용 데이터 초기화
     reverseCount_ = 0;
     reverseActive_ = false;
 
@@ -74,11 +73,9 @@ void ScoreboardManager::update(int currentLength,
     poisonCount_ = poisonCount;
     gateCount_ = gateCount;
 
-    // 추가_민석: C단계 Reverse Item 정보 저장
     reverseCount_ = reverseCount;
     reverseActive_ = reverseActive;
 
-    // 추가_민석: g_tick과 TICK_MS를 이용해 초 단위 시간 계산
     elapsedSeconds_ = (g_tick * TICK_MS) / 1000;
 }
 

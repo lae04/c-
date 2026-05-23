@@ -69,7 +69,7 @@ run: all
 	./$(EXE)
 
 # ─── 참고: 수동 컴파일 (강의자료 기준) ──────────
-# Linux  : g++ -o snake main.cpp globals.cpp map.cpp -lncurses -std=c++17
-# Windows: g++ -o snake main.cpp globals.cpp map.cpp -lpdcurses -std=c++17
+# Linux  : g++ -o snake main.cpp globals.cpp map.cpp snake.cpp renderer.cpp item.cpp gate.cpp scoreboard.cpp -lncurses -std=c++17
+# Windows: g++ -o snake.exe main.cpp globals.cpp map.cpp snake.cpp renderer.cpp item.cpp gate.cpp scoreboard.cpp -lpdcurses -std=c++17
 
 .PHONY: all clean rebuild run
