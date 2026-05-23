@@ -20,8 +20,8 @@
 #include "snake.h"  //추가_하윤
 #include "renderer.h"  //추가_하윤
 #include "item.h"        // 추가_진원: ItemManager 사용
-// #include "gate.h"
-// #include "scoreboard.h"
+#include "gate.h"          // 추가_민석: GateManager 사용
+#include "scoreboard.h"    // 추가_민석: ScoreboardManager 사용
  
 #include <ncurses.h>
 #include <unistd.h>      // usleep
@@ -34,9 +34,6 @@
 // void moveSnake()   { /* B 구현 */ }
 // bool checkDead()   { return false; } // 파일 삭제_하윤
 // spawnItem() / updateItems() stub 제거         ← 추가_진원: ItemManager로 대체
-void spawnGate()        { /* D 구현 */ }
-void renderScoreboard() { /* D 구현 */ }
-bool checkMission()     { return false; }
  
 // ────────────────────────────────────────────
 //  ncurses 초기화
@@ -129,6 +126,12 @@ void runStage(Map& map, const int stage) {
  
     ItemManager itemMgr;          // 추가_진원: 스테이지마다 새 인스턴스 생성
     itemMgr.init(map);            // 추가_진원: 기존 spawnItem() 대체
+    // 추가_민석: D단계 Gate와 Scoreboard 관리자 생성
+    GateManager gateMgr;
+    gateMgr.init(map);
+
+    ScoreboardManager scoreMgr;
+    scoreMgr.init(stage);
  
     g_gameState = RUNNING;
     g_tick = 0;
@@ -172,8 +175,15 @@ void runStage(Map& map, const int stage) {
         }
         // ── 추가_진원 끝 ──────────────────────────────────────────
  
-        // 6) 게이트 갱신 (D 구현 후 활성화)
-        // spawnGate();
+        // 6) 게이트 상호작용 및 갱신
+       // 추가_민석: Snake가 Gate에 진입하면 반대쪽 Gate로 이동
+    if (movedCell == GATE) {
+    const Pos head = getSnakeHead();
+    gateMgr.enterGate(map, head, g_snakeDir);
+    }
+
+    // 추가_민석: Gate 수명 갱신 및 재생성
+    gateMgr.update(map);
  
         // 7) 충돌 체크 (벽·자기몸 충돌 시 GAME_OVER)
         if (checkDead(map)) {
@@ -182,16 +192,31 @@ void runStage(Map& map, const int stage) {
         }
  
         // 8) 미션 달성 체크 (모든 미션 완료 시 STAGE_CLEAR)
-        if (checkMission()) {
-            g_gameState = STAGE_CLEAR;
-            break;
-        }
+        // 8) 점수판 갱신 및 미션 달성 체크
+      // 추가_민석: 현재 점수 정보를 ScoreboardManager에 반영
+    scoreMgr.update(
+    getSnakeLength(),
+    itemMgr.getGrowthCount(),
+    itemMgr.getPoisonCount(),
+    gateMgr.getGateCount(),
+    itemMgr.getReverseCount(),
+    itemMgr.isReversed()
+    );
+
+    // 추가_민석: 모든 미션 달성 시 스테이지 클리어
+    if (scoreMgr.isMissionClear()) {
+    g_gameState = STAGE_CLEAR;
+    break;
+    }
  
         // 9) 화면 출력
         clear();
-        map.render();
-        renderScoreboard();
-        refresh();
+map.render();
+
+// 수정_민석: ScoreboardManager가 만든 ScoreData를 renderer.cpp에 전달
+renderScoreboard(scoreMgr.makeScoreData());
+
+refresh();
     }
 }
  

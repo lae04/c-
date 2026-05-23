@@ -8,10 +8,10 @@ SRCS = main.cpp \
        globals.cpp \
        map.cpp \
        snake.cpp \
-       renderer.cpp \  # 추가_하윤
-       # item.cpp         ← C 완성 후 추가
-       # gate.cpp         ← D 완성 후 추가
-       # scoreboard.cpp   ← D 완성 후 추가
+       renderer.cpp \
+       item.cpp \
+       gate.cpp \
+       scoreboard.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -43,13 +43,21 @@ $(EXE): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # ─── 의존성 ──────────────────────────────────
-main.o:         main.cpp globals.h map.h
-globals.o:      globals.cpp globals.h
-map.o:          map.cpp map.h globals.h
-# snake.o:      snake.cpp snake.h globals.h map.h
-# item.o:       item.cpp item.h globals.h map.h
-# gate.o:       gate.cpp gate.h globals.h map.h
-# scoreboard.o: scoreboard.cpp scoreboard.h globals.h
+main.o: main.cpp globals.h map.h snake.h renderer.h item.h gate.h scoreboard.h
+
+globals.o: globals.cpp globals.h
+
+map.o: map.cpp map.h globals.h
+
+snake.o: snake.cpp snake.h globals.h map.h
+
+renderer.o: renderer.cpp renderer.h globals.h map.h
+
+item.o: item.cpp item.h globals.h map.h
+
+gate.o: gate.cpp gate.h globals.h map.h snake.h
+
+scoreboard.o: scoreboard.cpp scoreboard.h globals.h renderer.h
 
 # ─── 유틸리티 ────────────────────────────────
 clean:
