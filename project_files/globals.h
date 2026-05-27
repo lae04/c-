@@ -24,7 +24,7 @@ constexpr int MAP_SIZE     = 21;   // 최소 21x21
 // ────────────────────────────────────────────
 //  게임 타이밍
 // ────────────────────────────────────────────
-constexpr int TICK_MS      = 350;  // 1틱 = 200ms (조정 가능)
+constexpr int TICK_MS      = 400;  // 1틱 = 200ms (조정 가능)
 constexpr int ITEM_LIFE    = 15;   // 아이템 생존 틱 수
 constexpr int GATE_LIFE    = 30;   // 게이트 생존 틱 수
 
