@@ -39,9 +39,9 @@ void quitRenderer() {
 void renderScoreboard(const ScoreData& score) {
     if (!g_scoreWin) return;
 
-    touchwin(g_scoreWin); //수정_하윤 추가
+    //touchwin(g_scoreWin); //수정_하윤 추가
     
-    //werase(g_scoreWin);
+    werase(g_scoreWin);
     box(g_scoreWin, 0, 0);
 
     mvwprintw(g_scoreWin, 1, 2, "=== Score Board ===");
