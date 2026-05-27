@@ -23,8 +23,7 @@ void initRenderer() {
     g_scoreWin = newwin(SCORE_WIN_H, SCORE_WIN_W, 0, SCORE_WIN_X);
     scrollok(g_scoreWin, FALSE); //수정_하윤 추가
 
-    idlok(stdscr, FALSE);
-    idcok(stdscr, FALSE);
+
 }
 
 void quitRenderer() {
