@@ -199,7 +199,8 @@ void runStage(Map& map, const int stage) {
         // 수정_민석: ScoreboardManager가 만든 ScoreData를 renderer.cpp에 전달
         renderScoreboard(scoreMgr.makeScoreData());
 
-        refresh(); 
+        renderScoreboard(scoreMgr.makeScoreData());
+        doupdate();
         
     }
 }
