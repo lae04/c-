@@ -75,5 +75,5 @@ void renderScoreboard(const ScoreData& score) {
 
     mvwprintw(g_scoreWin, 15, 2, "Stage : %d", g_currentStage);
 
-    wrefresh(g_scoreWin);
+    wnoutrefresh(g_scoreWin); //수정_하윤 변경
 }
