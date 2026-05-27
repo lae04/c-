@@ -21,6 +21,7 @@ void initRenderer() {
         init_pair(CP_MISSION_NO, COLOR_WHITE, COLOR_BLACK);
     }
     g_scoreWin = newwin(SCORE_WIN_H, SCORE_WIN_W, 0, SCORE_WIN_X);
+    scrollok(g_scoreWin, FALSE); //수정_하윤 추가
 }
 
 void quitRenderer() {
