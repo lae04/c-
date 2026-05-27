@@ -193,7 +193,7 @@ void runStage(Map& map, const int stage) {
         }
 
         // 9) 화면 출력
-        clear();
+        werase(stdscr); //수정_하윤 clear() -> werase(stdscr);
         map.render();
 
         // 수정_민석: ScoreboardManager가 만든 ScoreData를 renderer.cpp에 전달
